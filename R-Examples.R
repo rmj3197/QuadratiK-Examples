@@ -181,3 +181,46 @@ unif_test
 ############################################################################
 #                              END OF LISTING 8                            #
 ############################################################################
+
+############################################################################
+#                               LISTING 9,10,11,12                         #
+############################################################################
+
+# This code is the R equivalent of the Python code in the Listings 9,10,11,12
+
+library(QuadratiK)
+
+# Load and inspect the wireless data
+head(wireless)
+
+# Separate features and labels
+wire <- wireless[, -8]
+labels <- wireless[, 8]
+
+# Normalize the data to unit vectors (spherical normalization)
+wire_norm <- wire / sqrt(rowSums(wire^2))
+
+# Set seed for reproducibility
+set.seed(2468)
+
+# Run Poisson-kernel-based clustering for k = 3, 4, 5
+res_pk <- pkbc(as.matrix(wire_norm), 3:5)
+
+# Validate clustering results using true labels
+validation <- pkbc_validation(res_pk, labels)
+
+# Print validation metrics (e.g., ARI, precision, recall)
+print(round(validation$metrics,5))
+
+# Plot the clustering results with true labels
+plot(res_pk, k=4, true_label = labels)
+
+# Summarize clustering results for k = 4
+summary_clust <- stats_clusters(res_pk, 4)
+
+summary_clust
+
+############################################################################
+#                            END OF LISTING 9,10,11,12                     #
+############################################################################
+
