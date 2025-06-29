@@ -405,7 +405,7 @@ def visualize_geojson(file_path):
     ax.set_zticks([-1, -0.5, 0, 0.5, 1])
     ax.view_init(elev=40, azim=50)
 
-    plt.savefig("Satellites.pdf", bbox_inches="tight", dpi=300)
+    # plt.savefig("Satelites.pdf", bbox_inches="tight", dpi=300)
     plt.show()
 
 
