@@ -66,7 +66,32 @@ kbqd_test
 #                               LISTING 4                                  #
 ############################################################################
 
+# This code was executed on HPC cluster. Please ensure you have the necessary
+# configuration to run it on your local machine or cluster.
+# The data file 'HIGGS.csv.gz' should be downloaded UCI Machine Learning Repository.
+# The dataset is large, hence it is not included in the repository.
 
+library(QuadratiK)
+
+# Load and preprocess data
+df <- read.csv("HIGGS.csv.gz", header = FALSE)
+
+# Select relevant features
+df <- df[, 1:22]
+
+# Separate samples based on class label 
+X <- df[df$V1 == 0, 2:22]
+Y <- df[df$V1 == 1, 2:22]
+
+# Take first 10000 samples from each class
+X <- as.matrix(X[1:20000, ])
+Y <- as.matrix(Y[1:20000, ])
+
+# Run two-sample test
+system.time(kbqd_test <- kb.test(x = X, y = Y, h = 1.5))
+
+# Print the result
+kbqd_test
 
 ############################################################################
 #                              END OF LISTING 4                            #
@@ -126,7 +151,7 @@ usgs_df <- read.csv("Datasets/usgs_earthquake_data.csv")[, c("latitude", "longit
 lat_rad <- usgs_df$latitude * pi / 180
 lon_rad <- usgs_df$longitude * pi / 180
 
-# Compute unit sphere coordinates
+# Compute unit sphere coordinatess
 usgs_df$x <- cos(lat_rad) * cos(lon_rad)
 usgs_df$y <- cos(lat_rad) * sin(lon_rad)
 usgs_df$z <- sin(lat_rad)
@@ -152,7 +177,6 @@ system.time(unif_test <- pk.test(
     B = 300, Quantile = 0.95
 ))
 unif_test
-
 
 ############################################################################
 #                              END OF LISTING 8                            #
