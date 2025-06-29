@@ -14,7 +14,21 @@ This repository contains example code and resources for the QuadratiK package, a
   - All statistical tests and clustering as above
   - Data preprocessing code for OneWeb Satelite data example
   - Usage of QuadratiK's Python API for kernel tests and clustering
+- `R-Comparisons.R`: R code for comparing MMD and Energy statistics on the Breast Cancer and Exoplanet datasets, and for performing uniformity tests on Earthquake and Satellite data.
+- `Python-Comparisons.py`: Python code for comparing MMD and Energy statistics on the Wine dataset.
 - `Datasets/`: Example datasets used in the code (CSV, TXT)
+
+## Required Packages
+
+### R
+- QuadratiK
+- energy
+- kernlab
+- sphunif
+
+### Python
+- QuadratiK
+- hyppo
 
 ## Usage
 
@@ -27,8 +41,8 @@ This repository contains example code and resources for the QuadratiK package, a
 2. Install the QuadratiK package in your R or Python environment as required.
 
 3. Run the examples:
-   - For R: Open and run `R-Examples.R` in RStudio or your preferred R environment.
-   - For Python: Run `Python-Examples.py` in your Python environment.
+   - For R: Open and run `R-Examples.R` or `R-Comparisons.R` in RStudio or your preferred R environment.
+   - For Python: Run `Python-Examples.py` or `Python-Comparisons.py` in your Python environment.
 
 4. Ensure all required datasets are present in the `Datasets/` folder. For large datasets (e.g., HIGGS), follow the instructions in the code comments to download them manually.
 
