@@ -1,7 +1,6 @@
 ##############################################################################
 #       COMPARISON OF MMD AND ENERGY STATISTICS ON THE WINE DATASET          #
 ##############################################################################
-import pandas as pd
 from QuadratiK.datasets import load_wine_data
 
 X = load_wine_data()

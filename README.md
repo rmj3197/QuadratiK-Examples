@@ -1,6 +1,6 @@
 # QuadratiK-Examples
 
-This repository contains example code and resources for the QuadratiK package, as referenced in the associated ACM manuscript. 
+This repository contains example code and resources for the QuadratiK package, as referenced in the associated manuscript. 
 
 ## Contents
 

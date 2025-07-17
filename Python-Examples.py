@@ -25,24 +25,6 @@ print(k_sample_test.summary())
 ############################################################################
 
 from QuadratiK.kernel_test import KernelTest
-from QuadratiK.datasets import load_wisconsin_breast_cancer_data
-
-X = load_wisconsin_breast_cancer_data()
-
-X1 = X[X["Class"] == 0].drop(columns=["Class"]).values
-X2 = X[X["Class"] == 1].drop(columns=["Class"]).values
-two_sample_test1 = KernelTest(h=2.4, method="subsampling", random_state=42).test(X1, X2)
-print(two_sample_test1.summary())
-
-############################################################################
-#                              END OF LISTING 2                            #
-############################################################################
-
-############################################################################
-#                               LISTING 3                                  #
-############################################################################
-
-from QuadratiK.kernel_test import KernelTest
 from QuadratiK.kernel_test import select_h
 
 # Load and preprocess data
@@ -64,11 +46,11 @@ two_sample_test2 = KernelTest(h=0.4, method="subsampling", random_state=42).test
 print(two_sample_test2.summary())
 
 ############################################################################
-#                              END OF LISTING 3                            #
+#                              END OF LISTING 2                            #
 ############################################################################
 
 ############################################################################
-#                               LISTING 4                                  #
+#                               LISTING 3                                  #
 ############################################################################
 
 # This code was executed on HPC cluster. Please ensure you have the necessary
@@ -79,7 +61,6 @@ print(two_sample_test2.summary())
 """
 import pandas as pd
 import time
-import tracemalloc
 
 # Load data
 df = pd.read_csv('HIGGS.csv.gz', compression='gzip', header=None)
@@ -89,33 +70,19 @@ Y = df[df[0] == 1][:20000].values[:,1:22]
 # Import your kernel test
 from QuadratiK.kernel_test import KernelTest
 
-# Start timing and memory tracing
-start_time = time.time()
-tracemalloc.start()
-
 # Run the two sample test
 two_sample_test = KernelTest(h=1.5, num_iter=150, n_jobs=20, random_state=42).test(X, Y)
 
-# End timing and memory tracking
-current, peak = tracemalloc.get_traced_memory()
-end_time = time.time()
-
 # Print results
 print(two_sample_test.summary())
-print(f"\nExecution time: {end_time - start_time:.2f} seconds")
-print(f"Current memory usage: {current / 10**6:.2f} MB")
-print(f"Peak memory usage: {peak / 10**6:.2f} MB")
-
-# Stop the trace
-tracemalloc.stop()
 """
 
 ############################################################################
-#                              END OF LISTING 4                            #
+#                              END OF LISTING 3                            #
 ############################################################################
 
 ############################################################################
-#                               LISTING 5                                  #
+#                               LISTING 4                                  #
 ############################################################################
 
 from QuadratiK.kernel_test import KernelTest
@@ -134,44 +101,16 @@ h_selected, all_powers, plot = select_h(
     method="subsampling",
     b=0.9,
     delta=[1, 2, 3],
-    random_state=100,
+    random_state=42,
 )
 print(f"Selected h is: {h_selected}")
 
 ############################################################################
-#                              END OF LISTING 5                            #
+#                              END OF LISTING 4                            #
 ############################################################################
 
 ############################################################################
-#                               LISTING 6                                  #
-############################################################################
-
-from QuadratiK.kernel_test import KernelTest
-from QuadratiK.datasets import load_wisconsin_breast_cancer_data
-
-X = load_wisconsin_breast_cancer_data()
-
-X1 = X[X["Class"] == 0].drop(columns=["Class"]).values
-X2 = X[X["Class"] == 1].drop(columns=["Class"]).values
-
-h_selected, all_powers, plot = select_h(
-    x=X1,
-    y=X2,
-    alternative="location",
-    power_plot=True,
-    method="subsampling",
-    b=0.9,
-    delta=[1, 2, 3],
-    random_state=100,
-)
-print(f"Selected h is: {h_selected}")
-
-############################################################################
-#                              END OF LISTING 6                            #
-############################################################################
-
-############################################################################
-#                               LISTING 7                                  #
+#                               LISTING 5                                  #
 ############################################################################
 
 import pandas as pd
@@ -250,11 +189,11 @@ unif_test = PoissonKernelTest(rho=0.3, random_state=42).test(
 print(unif_test.summary())
 
 ############################################################################
-#                              END OF LISTING 7                            #
+#                              END OF LISTING 5                            #
 ############################################################################
 
 ############################################################################
-#                               LISTING 8                                  #
+#                               LISTING 6                                  #
 ############################################################################
 
 import os
@@ -441,11 +380,11 @@ unif_test = PoissonKernelTest(rho=0.4, random_state=42).test(data)
 print(unif_test.summary())
 
 ############################################################################
-#                              END OF LISTING 8                            #
+#                              END OF LISTING 6                            #
 ############################################################################
 
 ############################################################################
-#                           LISTING 9,10,11,12                             #
+#                           LISTING 7,8,9,10                             #
 ############################################################################
 
 from QuadratiK.datasets import load_wireless_data
@@ -471,5 +410,5 @@ elbow_plots.show()
 print(pkbc.stats_clusters(num_clust=4))
 
 ############################################################################
-#                          END OF LISTING 9,10,11,12                       #
+#                          END OF LISTING 7,8,9,10                         #
 ############################################################################

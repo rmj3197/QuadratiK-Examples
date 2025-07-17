@@ -23,25 +23,6 @@ kbqd_test_wine
 ############################################################################
 
 library(QuadratiK)
-
-data(breast_cancer)
-dat <- breast_cancer
-x <- dat[which(dat$y == "B"), -ncol(dat)]
-y <- dat[which(dat$y == "M"), -ncol(dat)]
-
-# Perform the test
-system.time(kbqd_test <- kb.test(x = x, y = y, h = 0.4))
-kbqd_test
-
-############################################################################
-#                              END OF LISTING 2                            #
-############################################################################
-
-############################################################################
-#                               LISTING 3                                  #
-############################################################################
-
-library(QuadratiK)
 df <- read.csv("Datasets/open_exoplanet_catalogue.txt", header = TRUE)
 # Select columns and remove rows with missing values
 df <- df[, c(
@@ -59,11 +40,11 @@ system.time(kbqd_test <- kb.test(x = X, y = Y, h = 0.4))
 kbqd_test
 
 ############################################################################
-#                              END OF LISTING 3                            #
+#                              END OF LISTING 2                            #
 ############################################################################
 
 ############################################################################
-#                               LISTING 4                                  #
+#                               LISTING 3                                  #
 ############################################################################
 
 # This code was executed on HPC cluster. Please ensure you have the necessary
@@ -71,34 +52,36 @@ kbqd_test
 # The data file 'HIGGS.csv.gz' should be downloaded UCI Machine Learning Repository.
 # The dataset is large, hence it is not included in the repository.
 
-library(QuadratiK)
 
-# Load and preprocess data
-df <- read.csv("HIGGS.csv.gz", header = FALSE)
+# library(QuadratiK)
 
-# Select relevant features
-df <- df[, 1:22]
+# # Load and preprocess data
+# df <- read.csv("HIGGS.csv.gz", header = FALSE)
 
-# Separate samples based on class label 
-X <- df[df$V1 == 0, 2:22]
-Y <- df[df$V1 == 1, 2:22]
+# # Select relevant features
+# df <- df[, 1:22]
 
-# Take first 10000 samples from each class
-X <- as.matrix(X[1:20000, ])
-Y <- as.matrix(Y[1:20000, ])
+# # Separate samples based on class label 
+# X <- df[df$V1 == 0, 2:22]
+# Y <- df[df$V1 == 1, 2:22]
 
-# Run two-sample test
-system.time(kbqd_test <- kb.test(x = X, y = Y, h = 1.5))
+# # Take first 10000 samples from each class
+# X <- as.matrix(X[1:20000, ])
+# Y <- as.matrix(Y[1:20000, ])
 
-# Print the result
-kbqd_test
+# # Run two-sample test
+# system.time(kbqd_test <- kb.test(x = X, y = Y, h = 1.5))
 
-############################################################################
-#                              END OF LISTING 4                            #
-############################################################################
+# # Print the result
+# kbqd_test
+
 
 ############################################################################
-#                               LISTING 5                                  #
+#                              END OF LISTING 3                            #
+############################################################################
+
+############################################################################
+#                               LISTING 4                                  #
 ############################################################################
 
 data(wine)
@@ -116,33 +99,11 @@ time_wine
 h_sel_wine$h_sel
 
 ############################################################################
-#                              END OF LISTING 5                            #
+#                              END OF LISTING 4                            #
 ############################################################################
 
 ############################################################################
-#                               LISTING 6                                  #
-############################################################################
-
-dat <- breast_cancer
-x <- dat[which(dat$y == "B"), -ncol(dat)]
-y <- dat[which(dat$y == "M"), -ncol(dat)]
-
-# Perform algorithm for selection of h
-time_wisc <- system.time(
-    h_sel <- select_h(
-        x = x, y = y, alternative = "skewness",
-        method = "subsampling", b = 0.5
-    )
-)
-time_wisc
-h_sel$h_sel
-
-############################################################################
-#                              END OF LISTING 6                            #
-############################################################################
-
-############################################################################
-#                               LISTING 7                                  #
+#                               LISTING 5                                  #
 ############################################################################
 
 library(QuadratiK)
@@ -162,11 +123,11 @@ system.time(unif_test <- pk.test(x = X, rho = 0.3, B = 300, Quantile = 0.95))
 unif_test
 
 ############################################################################
-#                              END OF LISTING 7                            #
+#                              END OF LISTING 5                            #
 ############################################################################
 
 ############################################################################
-#                               LISTING 8                                  #
+#                               LISTING 6                                  #
 ############################################################################
 
 library(QuadratiK)
@@ -179,11 +140,11 @@ system.time(unif_test <- pk.test(
 unif_test
 
 ############################################################################
-#                              END OF LISTING 8                            #
+#                              END OF LISTING 6                            #
 ############################################################################
 
 ############################################################################
-#                               LISTING 9,10,11,12                         #
+#                             LISTING 7,8,9,10                             #
 ############################################################################
 
 # This code is the R equivalent of the Python code in the Listings 9,10,11,12
@@ -221,6 +182,6 @@ summary_clust <- stats_clusters(res_pk, 4)
 summary_clust
 
 ############################################################################
-#                            END OF LISTING 9,10,11,12                     #
+#                          END OF LISTING 7,8,9,10                         #
 ############################################################################
 
