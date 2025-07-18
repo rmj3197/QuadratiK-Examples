@@ -1,46 +1,9 @@
 ##############################################################################
-#       COMPARISON OF MMD AND ENERGY STATISTICS ON BREAST CANCER DATASET    #
+#       COMPARISON OF MMD AND ENERGY STATISTICS ON EXOPLANET DATASET        #
 ##############################################################################
-
 library(energy)
 library(kernlab)
 library(QuadratiK)
-
-# Load and prepare Breast Cancer dataset
-data(breast_cancer)
-dat <- breast_cancer
-x <- as.matrix(dat[which(dat$y == "B"), -ncol(dat)])  # Benign
-y <- as.matrix(dat[which(dat$y == "M"), -ncol(dat)])  # Malignant
-
-cat("\n================== BREAST CANCER DATASET ==================\n")
-
-# MMD Test on Breast Cancer Data
-cat("\n--- Maximum Mean Discrepancy (MMD) Test ---\n")
-mmd_time <- system.time({
-  mmdtest <- kmmd(x = x, y = y, kernel = "rbfdot", kpar = "automatic", alpha = 0.05, asymptotic = TRUE, B = 150)
-})
-print(mmd_time)
-print(mmdtest)
-
-cat("\n##############################################################################\n")
-cat("#                      END OF BREAST CANCER MMD TEST                         #\n")
-cat("##############################################################################\n")
-
-# Energy Test on Breast Cancer Data
-cat("\n--- Energy Distance Test ---\n")
-energy_time <- system.time({
-  energy_test <- eqdist.etest(x = rbind(x, y), sizes = c(dim(x)[1], dim(y)[1]), R = 150)
-})
-print(energy_time)
-print(energy_test)
-
-cat("\n##############################################################################\n")
-cat("#                  END OF BREAST CANCER ENERGY TEST                          #\n")
-cat("##############################################################################\n\n")
-
-##############################################################################
-#       COMPARISON OF MMD AND ENERGY STATISTICS ON EXOPLANET DATASET        #
-##############################################################################
 
 # Load and prepare Exoplanet dataset
 df <- read.csv("Datasets/open_exoplanet_catalogue.txt", header = TRUE)

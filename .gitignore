@@ -8,3 +8,4 @@
 *.tle
 *.pdf
 *.geojson
+*.DS_Store
